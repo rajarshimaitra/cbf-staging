@@ -5,7 +5,7 @@ As per the discussion, in order to handle multiple peers, we need to rearrange t
 
 A rough sketch of the initial idea for the node's architecture is as below.
 
-![Node Arch](./docs/node_arch.png)
+![Node Arch](node_arch.png)
 
 In order to test the `PeerManager` we need to simulate mock `Peer` structures that can feed in network data to the manager.
 
@@ -13,7 +13,7 @@ In order to test the `PeerManager` we need to simulate mock `Peer` structures th
 ## AddressManager
 A similar, but simpler structure will be needed for `AddressManager` also. As below.
 
-![AddressManager Arch](./docs/addrs_manager.png)
+![AddressManager Arch](addrs_manager.png)
 
 Here, each `W` represents a "worker" whose job is to connect to the given peer address and ask for all it's known addresses. So the `AddressManager` is essentially a network crawler.
 
@@ -40,10 +40,10 @@ Following is a rough steps that we can take to reach to a minimal viable prototy
 
 At this stage the basic idea should be working and testable. Below are future improvements after we reach the basic prototype stage.
 
- - Simplify the `Store` and remove `rocksdb`. The current structure of the filter store, is heavily influenced by `rocksdb` and bdk wanted to remove `rocksdb` from CBF ([bdk-issue-link](https://github.com/bitcoindevkit/bdk/issues/480)). Possible alternate is sqlite which is simple and can.
+ - Simplify the `Store` and remove `rocksdb`. BDK wanted to remove `rocksdb` from CBF ([bdk-issue-link](https://github.com/bitcoindevkit/bdk/issues/480)). That can lead to possible simplification of the `Store` structure too. Possible alternative is sqlite which is more simple and suitable for mobile environment.
 
   - Add More Peer variety and maintain good list of peers in address database. Deploy some form of ranking strategy.
  - Don't ban peers permanently as there can be probabilistic network error.
  - Maintain top 100 filter data in memory for quick access.
-  - Handle parallel request processing.
+  - Handle parallel request processing, to speed up initial sync.
   - Finish up all other pending features in this [bdk-issue](https://github.com/bitcoindevkit/bdk/issues/81)
