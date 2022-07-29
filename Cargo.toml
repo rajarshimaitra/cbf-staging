@@ -1,0 +1,17 @@
+[package]
+name = "cbf-node"
+version = "0.0.1"
+edition = "2018"
+readme = "README.md"
+
+[dependencies]
+bitcoin = { version = "0.28.1", features = ["use-serde", "base64", "rand"] }
+socks = "0.3"
+log = "^0.4"
+thiserror = "1.0.31"
+serde = { version = "^1.0", features = ["derive"] }
+serde_json = { version = "^1.0" }
+rocksdb = { version = "0.14", default-features = false, features = ["snappy"] }
+lazy_static = "1.4"
+
+[features]
